@@ -7,11 +7,15 @@ const rules = [
   {
     test: /\.tsx$/,
     loader: "ts-loader",
-    exclude:/node_modules/
+    exclude: /node_modules/,
   },
   {
-    test:/\.scss$/,
-    loader:"sass-loader"
+    test: /\.scss$/,
+    loader: "sass-loader",
+  },
+  {
+    test: /\.(js|jsx|ts|tsx)$/,
+    loader:require.resolve('babel-loader')
   }
 ];
 
@@ -28,6 +32,15 @@ const out = {
     rules,
   },
   plugins: [],
+  // devtool:'inline-source-map',
+  resolve:{
+    extensions:[".js",".css",".tsx"]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "build"),
+    compress: true,
+    port: 9191,
+  },
 };
 
 module.exports = out;
